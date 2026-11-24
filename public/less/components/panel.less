@@ -1,0 +1,80 @@
+// ===== Panel interno =====
+body.panel { background: @fondo; display: block; }
+
+.panel-layout { display: grid; min-height: 100vh;
+  grid-template-rows: auto 1fr;                 // en celular: menú arriba (alto justo) y contenido debajo
+  grid-template-columns: minmax(0, 1fr);        // la columna no crece más que la pantalla
+  > * { min-width: 0; }                         // evita que una tabla ancha estire toda la página
+  .respond(@bp-lg; { grid-template-columns: @sidebar minmax(0, 1fr); grid-template-rows: none; });
+}
+
+.barra-lateral {
+  background: @verde-profundo; color: @blanco; padding: 1rem;
+  .respond(@bp-lg; { position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 1.75rem 1.1rem; });
+  .logo { margin: 0 .4rem 1.5rem;
+    svg rect { fill: @blanco; } svg path { fill: @verde; }
+    .logo-texto { color: @blanco; font-size: 1.25rem; small { color: fade(@blanco, 55%); } }
+  }
+  .quien { font-size: .85rem; color: fade(@blanco, 60%); margin: 0 .4rem 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid fade(@blanco, 12%);
+    strong { color: @blanco; display: block; font-size: .95rem; } }
+  nav { .flex(row; flex-start; stretch; .25rem); overflow-x: auto; padding-bottom: .3rem;
+    scrollbar-width: thin; scrollbar-color: fade(@blanco, 25%) transparent;   // barra de desplazamiento discreta (celular)
+    .respond(@bp-lg; { flex-direction: column; overflow: visible; });
+    button {
+      border: 0; background: transparent; text-align: left; white-space: nowrap; color: fade(@blanco, 75%);
+      padding: .65rem .9rem; border-radius: @radio-sm; font-weight: 500; font-size: .95rem;
+      transition: background @rapido, color @rapido;
+      &:hover { background: fade(@blanco, 7%); color: @blanco; }
+      &.activo { background: fade(@blanco, 12%); color: @blanco; font-weight: 600; box-shadow: inset 3px 0 0 @verde-claro; }
+    }
+  }
+  .btn-natyfarma-borde { .boton-borde(fade(@blanco, 80%); @verde-profundo); padding: .45rem 1rem; font-size: .88rem; }
+}
+
+.contenido { padding: 1.5rem; .respond(@bp-lg; { padding: 2.25rem 2.75rem; });
+  .encabezado { .flex(row; space-between; center; 1rem); flex-wrap: wrap; margin-bottom: 1.75rem; h1 { font-size: 1.85rem; margin: 0; } }
+  .vista { animation: aparecer .35s @ease both; }
+}
+
+.metricas { .grid-auto(210px; 1rem); margin-bottom: 1.5rem;
+  .metrica { .tarjeta(1.3rem);
+    .valor { font-family: @fuente-titulos; font-size: 1.9rem; font-weight: 600; color: @verde; line-height: 1.2; }
+    .nombre { color: @texto-suave; font-size: .9rem; }
+    &.alerta .valor { color: @alerta; }
+  }
+}
+
+.caja-panel { .tarjeta(1.4rem); margin-bottom: 1.25rem; h2 { font-size: 1.15rem; margin-bottom: 1rem; } }
+.tabla-wrap { overflow-x: auto; }
+.table { font-size: .95rem; --bs-table-hover-bg: @fondo;
+  th { color: @texto-suave; font-weight: 600; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; border-bottom-color: @borde; }
+  td { vertical-align: middle; border-color: @borde; }
+}
+.chip { display: inline-block; white-space: nowrap; padding: .15rem .65rem; border-radius: @radio-sm; font-size: .8rem; font-weight: 600; background: @verde-suave; color: @verde;
+  &.rojo { background: #FBE9E7; color: @alerta; } &.gris { background: #EEF0EE; color: @texto-suave; } }
+.mini-icono { .caja-icono(2.75rem); }
+
+// Casillas de módulos al crear o editar un rol
+.permisos { display: grid; gap: .5rem; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); margin-top: .4rem;
+  .permiso { .flex(row; flex-start; center; .6rem); border: 1px solid @borde; border-radius: @radio-sm; padding: .6rem .8rem; cursor: pointer;
+    .prefijo(transition; ~"background @{rapido}, border-color @{rapido}");
+    input { width: 1.05rem; height: 1.05rem; accent-color: @verde; flex: none; }
+    span { font-size: .95rem; }
+    &:hover { background: @fondo; }
+    &:has(input:checked) { border-color: @verde; background: @verde-suave; }
+  }
+}
+
+// Punto de venta
+.pos { display: grid; gap: 1.25rem; .respond(@bp-xl; { grid-template-columns: 1.5fr 1fr; });
+  .lista-pos { .grid-auto(170px; .8rem); max-height: 62vh; overflow-y: auto; padding: .2rem; }
+  .item-pos { .tarjeta(.9rem); text-align: left; cursor: pointer; transition: border-color @rapido, box-shadow @rapido;
+    &:hover:not(:disabled) { border-color: @verde; box-shadow: @sombra; } &:disabled { opacity: .5; cursor: not-allowed; }
+    .n { font-weight: 600; font-size: .95rem; line-height: 1.3; } .s { font-size: .82rem; color: @texto-suave; } .p { color: @verde; font-weight: 600; font-family: @fuente-titulos; }
+  }
+  .carrito { position: sticky; top: 1rem; align-self: start;
+    .linea { .flex(row; space-between; center; .6rem); padding: .55rem 0; border-bottom: 1px solid @borde; .nom { flex: 1; font-size: .95rem; line-height: 1.3; }
+      .cant { .flex(row; center; center; .35rem); button { width: 2rem; height: 2rem; border-radius: @radio-sm; border: 1px solid @borde; background: @blanco; font-weight: 700; &:hover { background: @verde-suave; } } } }
+    .total { .flex(row; space-between; center); font-family: @fuente-titulos; font-size: 1.5rem; font-weight: 600; color: @verde; margin: 1rem 0; }
+  }
+}

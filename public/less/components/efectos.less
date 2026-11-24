@@ -1,0 +1,143 @@
+// ===== Efectos de la Unidad 3 =====
+// Sesión 9: animaciones con @keyframes · Sesión 10: transiciones y transformaciones 2D/3D
+// Sesión 11: compatibilidad entre navegadores (prefijos, @supports y alternativas)
+
+/* ---------- Sesión 9 · Animación de carga (skeleton) ----------
+   Mientras el catálogo llega del servidor se muestran tarjetas de espera.
+   La animación tiene varios puntos clave (0%, 50%, 100%). */
+@keyframes brillo {
+  0%   { background-position: 100% 50%; opacity: .75; }
+  50%  { opacity: 1; }
+  100% { background-position: 0% 50%; opacity: .75; }
+}
+@-webkit-keyframes brillo {
+  0%   { background-position: 100% 50%; opacity: .75; }
+  50%  { opacity: 1; }
+  100% { background-position: 0% 50%; opacity: .75; }
+}
+
+.esqueleto {
+  background-color: @verde-suave;      // respaldo si no hay degradados
+  background-image: linear-gradient(90deg, @verde-suave 25%, lighten(@verde-suave, 4%) 37%, @verde-suave 63%);
+  background-size: 400% 100%;
+  // Propiedades de la animación escritas una por una
+  .prefijo(animation-name; brillo);
+  .prefijo(animation-duration; 1.4s);
+  .prefijo(animation-timing-function; ease-in-out);
+  .prefijo(animation-delay; 0s);
+  .prefijo(animation-iteration-count; infinite);
+  .prefijo(animation-direction; normal);
+  .prefijo(animation-fill-mode; both);
+}
+
+.tarjeta-categoria.esqueleto { min-height: 15rem; border-color: transparent; box-shadow: none; }
+
+.tarjeta-esqueleto {
+  .tarjeta(0); overflow: hidden; display: flex; flex-direction: column;
+  .media { height: 160px; }
+  .cuerpo { padding: 1.1rem 1.2rem 1.25rem; display: flex; flex-direction: column; gap: .6rem; }
+  .linea { display: block; height: .8rem; border-radius: 4px; width: 80%; &.corta { width: 45%; } }
+}
+
+/* ---------- Sesión 9 · Sello flotante de la portada ----------
+   Dos animaciones en el mismo elemento: entrada y flotación suave en vaivén (alternate). */
+@keyframes flotar {
+  0%   { -webkit-transform: translateY(0); transform: translateY(0); }
+  100% { -webkit-transform: translateY(-6px); transform: translateY(-6px); }
+}
+.hero .hero-sello {
+  .prefijo(animation-name; ~"entrar-arriba, flotar");
+  .prefijo(animation-duration; ~".7s, 3.5s");
+  .prefijo(animation-timing-function; ~"@{ease}, ease-in-out");
+  .prefijo(animation-delay; ~".45s, 1.2s");
+  .prefijo(animation-iteration-count; ~"1, infinite");
+  .prefijo(animation-direction; ~"normal, alternate");
+  .prefijo(animation-fill-mode; both);
+}
+
+/* ---------- Sesión 10 · Tarjetas que giran en 3D (Misión y Visión) ----------
+   perspective + transform-style: preserve-3d + rotateY + backface-visibility */
+.tarjeta-giro {
+  .prefijo(perspective; 1100px);
+  height: 16rem;
+  border-radius: @radio;
+  cursor: pointer;
+  &:focus-visible { outline: 2px solid @verde-acento; outline-offset: 4px; }
+
+  .giro-interior {
+    position: relative; height: 100%;
+    .prefijo(transform-style; preserve-3d);
+    .prefijo(transition-property; transform);
+    .prefijo(transition-duration; .8s);
+    .prefijo(transition-timing-function; @ease);
+  }
+
+  .cara {
+    position: absolute; top: 0; right: 0; bottom: 0; left: 0;   // en vez de "inset" (más compatible)
+    .tarjeta(2rem);
+    .flex(column; center; flex-start; .5rem);
+    .prefijo(backface-visibility; hidden);
+    // Respaldo para navegadores sin 3D acelerado: cada cara cambia de visibilidad justo a la mitad
+    // del giro (90°), con un retardo igual a la mitad de la duración (.4s de .8s)
+    .prefijo(transition; opacity 0s linear .4s);
+    .icono { .caja-icono(3rem); margin-bottom: .75rem; }
+    h2 { margin: 0; }
+  }
+  // Safari/WebKit: backface-visibility solo funciona si la cara frontal también tiene una transformación 3D
+  .frente { .prefijo(transform; ~"rotateY(0deg) translateZ(1px)"); opacity: 1; }
+  .frente .pista { .flex(row; flex-start; center; .4rem); color: @texto-suave; font-size: .88rem; margin: .5rem 0 0;
+    .ico { width: 1rem; height: 1rem; } }
+  .reverso {
+    .prefijo(transform; rotateY(180deg));
+    opacity: 0;
+    background: @verde; border-color: @verde; color: @blanco;
+    .titulo { font-family: @fuente-titulos; font-size: 1.3rem; font-weight: 600; }
+    p { color: #DCE8E0; color: fade(@blanco, 85%); margin: 0; }
+  }
+}
+
+// Estado "girada": rota el contenedor y muestra la cara trasera (mixin reutilizado abajo)
+.girar() {
+  .giro-interior { .prefijo(transform; rotateY(180deg)); }
+  .frente { opacity: 0; }
+  .reverso { opacity: 1; }
+}
+// Solo en equipos con mouse: girar al pasar el cursor o al enfocar con el teclado
+@media (hover: hover) {
+  .tarjeta-giro:hover, .tarjeta-giro:focus, .tarjeta-giro.girada { .girar(); }
+}
+// En celulares y tablets (sin cursor) se toca para girar
+@media (hover: none) {
+  .tarjeta-giro.girada { .girar(); }
+}
+
+/* ---------- Sesión 10 · Transformaciones en la portada ---------- */
+.hero .hero-fotos figure {
+  .prefijo(transition-property; transform);
+  .prefijo(transition-duration; .5s);
+  .prefijo(transition-timing-function; @ease);
+  img { .prefijo(transition; transform .8s @ease); }
+  &:hover img { .prefijo(transform; scale(1.04)); }          // scale
+}
+
+/* ---------- Sesión 11 · Alternativas cuando el navegador no soporta algo ---------- */
+// Cabecera translúcida con desenfoque: si no hay backdrop-filter, fondo blanco sólido
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .cabecera { background: @blanco; }
+}
+
+// Sin CSS Grid: las rejillas pasan a Flexbox con ajuste de línea
+@supports not (display: grid) {
+  .rejilla-categorias, .rejilla-productos, .ventajas, .misvis, .fotos-local, .franja-info .datos, .pie .columnas {
+    display: -webkit-box; display: -ms-flexbox; display: flex;
+    -ms-flex-wrap: wrap; flex-wrap: wrap;
+    > * { -ms-flex: 1 1 240px; flex: 1 1 240px; margin: .6rem; }
+  }
+}
+
+// Sin 3D: las tarjetas de Misión y Visión muestran el texto directamente
+@supports not ((-webkit-backface-visibility: hidden) or (backface-visibility: hidden)) {
+  .tarjeta-giro { height: auto; }
+  .tarjeta-giro .cara { position: static; }
+  .tarjeta-giro .frente { display: none; }
+}

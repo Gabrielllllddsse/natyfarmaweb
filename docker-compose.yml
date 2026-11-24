@@ -1,0 +1,47 @@
+# NatyfarmaWeb con Docker: aplicación + MySQL 8
+# Uso:  docker compose up -d --build   ->  http://localhost:3000
+# Las contraseñas se leen del archivo .env (DB_PASSWORD y JWT_SECRET).
+name: natyfarma
+
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-natyfarma123}
+      MYSQL_DATABASE: natyfarma
+      TZ: America/Lima
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "3307:3306"            # para conectarse desde MySQL Workbench (localhost:3307)
+    volumes:
+      - datos_mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 --protocol=TCP -uroot -p\"$$MYSQL_ROOT_PASSWORD\" --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PORT: 3000
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: ${DB_PASSWORD:-natyfarma123}
+      DB_NAME: natyfarma
+      JWT_SECRET: ${JWT_SECRET:-cambia-esta-frase-larga-y-secreta}
+      TZ: America/Lima
+    ports:
+      - "3000:3000"
+    volumes:
+      - fotos_productos:/app/public/uploads   # fotos subidas desde el panel
+
+volumes:
+  datos_mysql:
+  fotos_productos:

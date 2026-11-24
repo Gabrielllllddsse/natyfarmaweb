@@ -1,0 +1,32 @@
+# Despliegue en Render (plan gratuito). Render lee este archivo al crear un "Blueprint".
+# La base de datos MySQL va aparte (Aiven, plan Free): sus datos se escriben en el panel de Render.
+services:
+  - type: web
+    name: natyfarmaweb
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm ci --omit=dev
+    startCommand: npm run start:nube      # prepara/actualiza la base y luego inicia el servidor
+    healthCheckPath: /salud
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "20"
+      - key: JWT_SECRET
+        generateValue: true                # Render genera una clave secreta aleatoria
+      - key: DB_SSL
+        value: "true"
+      - key: DB_HOST
+        sync: false                        # se pide al crear el servicio
+      - key: DB_PORT
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_NAME
+        value: natyfarma
+      - key: DB_CA
+        sync: false                        # certificado CA de Aiven (texto completo)

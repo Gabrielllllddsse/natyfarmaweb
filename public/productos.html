@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Productos · Natyfarma</title>
+<meta name="description" content="Natyfarma, botica en Huancayo: medicamentos, cuidado personal, vitaminas y dermocosmética. Atención las 24 horas.">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/main.css" rel="stylesheet">
+</head>
+<body data-page="productos">
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<div id="cabecera"></div>
+<main id="contenido">
+
+<section class="cabecera-pagina" aria-labelledby="t-prod">
+  <div class="container">
+    <span class="etiqueta">Catálogo</span>
+    <h1 id="t-prod">Nuestros productos</h1>
+    <p>Busca por nombre o filtra por categoría. Consulta la disponibilidad con nuestro personal.</p>
+  </div>
+</section>
+
+<section class="seccion" aria-label="Catálogo de productos">
+  <div class="container catalogo">
+    <aside class="catalogo-filtros" aria-label="Filtros">
+      <label class="form-label" for="buscar">Buscar producto</label>
+      <div class="buscador">
+        <span data-icono="buscar"></span>
+        <input id="buscar" class="form-control" type="search" placeholder="Ej.: paracetamol" autocomplete="off">
+      </div>
+      <h2>Categorías</h2>
+      <div class="filtros" id="filtros" role="group" aria-label="Filtrar por categoría"></div>
+    </aside>
+    <div>
+      <div id="aviso-ofertas"></div>
+      <div class="rejilla-productos" id="rejilla-productos" aria-live="polite" aria-busy="true">
+        <!-- Tarjetas de espera con animación (Sesión 9); se reemplazan al cargar el catálogo -->
+        <div class="tarjeta-esqueleto" aria-hidden="true"><div class="media esqueleto"></div><div class="cuerpo"><span class="linea corta esqueleto"></span><span class="linea esqueleto"></span><span class="linea corta esqueleto"></span></div></div>
+        <div class="tarjeta-esqueleto" aria-hidden="true"><div class="media esqueleto"></div><div class="cuerpo"><span class="linea corta esqueleto"></span><span class="linea esqueleto"></span><span class="linea corta esqueleto"></span></div></div>
+        <div class="tarjeta-esqueleto" aria-hidden="true"><div class="media esqueleto"></div><div class="cuerpo"><span class="linea corta esqueleto"></span><span class="linea esqueleto"></span><span class="linea corta esqueleto"></span></div></div>
+      </div>
+      <p class="text-secondary small mt-4 mb-0">Los precios son referenciales. La compra se realiza en la botica; consulta disponibilidad con nosotros.</p>
+    </div>
+  </div>
+</section>
+
+<div class="modal fade modal-producto" id="modal-producto" tabindex="-1" aria-labelledby="mp-titulo" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header border-0"><h2 class="modal-title h4" id="mp-titulo"></h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button></div>
+    <div class="modal-body pt-0" id="mp-cuerpo"></div>
+  </div></div>
+</div>
+</main>
+<div id="pie"></div>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="js/core.js"></script><script src="js/layout.js"></script><script src="js/pages.js"></script>
+</body>
+</html>

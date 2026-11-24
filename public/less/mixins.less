@@ -1,0 +1,127 @@
+// ===== Mixins reutilizables =====
+
+// Media query "mobile first" con bloque de reglas
+.respond(@bp; @rules) {
+  @media (min-width: @bp) { @rules(); }
+}
+
+// Flexbox en una línea
+.flex(@dir: row; @justify: flex-start; @align: stretch; @gap: 0) {
+  display: flex;
+  flex-direction: @dir;
+  justify-content: @justify;
+  align-items: @align;
+  gap: @gap;
+}
+
+// Grid responsivo automático: tantas columnas como quepan
+.grid-auto(@min: 240px; @gap: 1.25rem) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(@min, 1fr));
+  gap: @gap;
+}
+
+// Tarjeta base
+.tarjeta(@pad: 1.5rem) {
+  background: @blanco;
+  border: 1px solid @borde;
+  border-radius: @radio;
+  box-shadow: @sombra-suave;
+  padding: @pad;
+}
+
+// Caja cuadrada para un icono de línea
+.caja-icono(@tam: 3rem; @fondo-ico: @verde-suave; @color-ico: @verde) {
+  flex: none;
+  width: @tam;
+  height: @tam;
+  .flex(row; center; center);
+  background: @fondo-ico;
+  color: @color-ico;
+  border-radius: @radio-sm;
+  .ico { width: (@tam / 2); height: (@tam / 2); }
+}
+
+// Compatibilidad entre navegadores (Sesión 11): escribe la propiedad con prefijo -webkit-
+// (Safari y navegadores WebKit antiguos) y luego la versión estándar
+.prefijo(@propiedad; @valor) {
+  -webkit-@{propiedad}: @valor;
+  @{propiedad}: @valor;
+}
+
+// Elevar al pasar el mouse (Sesión 10: transición con sus subpropiedades y transform: translateY)
+.elevar() {
+  .prefijo(transition-property; ~"transform, box-shadow, border-color");
+  .prefijo(transition-duration; ~"@{medio}, @{medio}, @{rapido}");
+  .prefijo(transition-timing-function; @ease);
+  .prefijo(transition-delay; 0s);
+  &:hover, &:focus-within {
+    .prefijo(transform; translateY(-3px));
+    box-shadow: @sombra;
+    border-color: @verde;                 // color sólido de respaldo
+    border-color: fade(@verde, 35%);
+  }
+}
+
+// Botón con color configurable (usa funciones de color de Less)
+.boton(@bg; @color: @blanco) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  background: @bg;
+  color: @color;
+  border: 1px solid @bg;
+  border-radius: @radio-sm;
+  font-weight: 600;
+  font-size: .98rem;
+  padding: .8rem 1.5rem;
+  transition: background @rapido, border-color @rapido, box-shadow @rapido;
+  .ico { width: 1.1em; height: 1.1em; transition: transform @rapido @ease; }
+  &:hover, &:focus-visible {
+    background: darken(@bg, 6%);
+    border-color: darken(@bg, 6%);
+    color: @color;
+    box-shadow: 0 8px 20px fade(@bg, 22%);
+    .ico { transform: translateX(3px); }
+  }
+}
+
+.boton-borde(@c; @texto-hover: @blanco) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  background: transparent;
+  color: @c;
+  border: 1px solid @c;
+  border-radius: @radio-sm;
+  font-weight: 600;
+  font-size: .98rem;
+  padding: .8rem 1.5rem;
+  transition: background @rapido, color @rapido;
+  .ico { width: 1.1em; height: 1.1em; }
+  &:hover, &:focus-visible { background: @c; color: @texto-hover; border-color: @c; }
+}
+
+// Etiqueta pequeña sobre los títulos, con una línea delante
+.sobretitulo(@color: @verde-acento) {
+  .flex(row; flex-start; center; .6rem);
+  color: @color;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  &::before { content: ''; width: 1.6rem; height: 1px; background: currentColor; }
+}
+
+// Entrada escalonada: genera retardos para los primeros @n hijos (mixin recursivo con guarda)
+.escalonar(@n; @i: 1) when (@i =< @n) {
+  &:nth-child(@{i}) { animation-delay: (@i * 55ms); }
+  .escalonar(@n; (@i + 1));
+}
+
+// Respeta a quienes piden menos movimiento
+.sin-movimiento(@rules) {
+  @media (prefers-reduced-motion: reduce) { @rules(); }
+}

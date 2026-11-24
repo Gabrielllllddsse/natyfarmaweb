@@ -1,0 +1,22 @@
+// ===== Animaciones, transiciones y transformaciones =====
+@keyframes entrar-arriba { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes entrar-foto   { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes latido        { 0% { box-shadow: 0 0 0 0 fade(@verde-acento, 45%); } 70% { box-shadow: 0 0 0 8px fade(@verde-acento, 0%); } 100% { box-shadow: 0 0 0 0 fade(@verde-acento, 0%); } }
+@keyframes aparecer      { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+// Una sola secuencia de entrada, al cargar la portada
+.hero {
+  .hero-texto > * { animation: entrar-arriba .7s @ease both; .escalonar(6); }
+  .hero-fotos figure { animation: entrar-foto .9s @ease both; &:nth-child(2) { animation-delay: .15s; } }
+  // .hero-sello: su animación (entrada + flotación) está en components/efectos.less
+}
+
+// Tarjetas del catálogo: aparecen al filtrar o buscar
+.tarjeta-producto { animation: aparecer .4s @ease both; .escalonar(12); }
+
+// Indicador "abierto 24 horas"
+.abierto-ya .punto { animation: latido 2.4s infinite; }
+
+.sin-movimiento({
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+});

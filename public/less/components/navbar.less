@@ -1,0 +1,55 @@
+// ===== Barra superior, cabecera y navegación (Flexbox) =====
+.barra-superior {
+  background: @verde-profundo; color: fade(@blanco, 78%); font-size: .84rem; padding: .5rem 0;
+  .container { .flex(row; flex-end; center; 1.75rem); flex-wrap: wrap; }
+  span { display: inline-flex; align-items: center; gap: .45rem; }
+  .ico { color: @verde-claro; width: 1.05rem; height: 1.05rem; }
+}
+
+// Logo (cabecera, pie y panel)
+.logo {
+  .flex(row; flex-start; center; .7rem); display: inline-flex; text-decoration: none;
+  svg { width: 40px; height: 40px; flex: none; }
+  .logo-texto {
+    .flex(column; center; flex-start); line-height: 1.05;
+    font-family: @fuente-titulos; font-weight: 600; font-size: 1.4rem; letter-spacing: -.01em; color: @verde;
+    small { font-family: @fuente; font-size: .66rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: @texto-suave; margin-top: .3rem; }
+  }
+}
+
+.cabecera {
+  position: sticky; top: 0; z-index: 1030;
+  background: @blanco;                 // respaldo sólido (navegadores sin rgba)
+  background: fade(@blanco, 96%);
+  .prefijo(backdrop-filter; blur(10px));
+  border-bottom: 1px solid @borde;
+
+  .navbar { padding: .85rem 0; }
+  .navbar-toggler { border-color: @borde; &:focus { box-shadow: 0 0 0 .2rem fade(@verde, 18%); } }
+
+  .nav-link {
+    position: relative; color: @texto; font-weight: 500; font-size: .98rem; padding: .5rem 1rem !important;
+    &::after {            // subrayado que crece de izquierda a derecha
+      content: ''; position: absolute; left: 1rem; right: 1rem; bottom: .2rem; height: 2px;
+      background: @verde; transform: scaleX(0); transform-origin: left;
+      transition: transform @medio @ease;
+    }
+    &:hover { color: @verde; }
+    &:hover::after, &.active::after { transform: scaleX(1); }
+    &.active { color: @verde; font-weight: 600; }
+  }
+
+  .cuenta { .flex(row; flex-start; center; .6rem); flex-wrap: wrap; padding: .75rem 0 .25rem; .respond(@bp-lg; { padding: 0; }); }
+  .btn-sesion { .boton(@verde); padding: .6rem 1.2rem; font-size: .92rem; }
+  .saludo { font-weight: 600; color: @verde; font-size: .95rem; }
+}
+
+// Menú desplegable en celulares y tablets (por debajo de lg)
+@media (max-width: (@bp-lg - 0.02px)) {
+  .cabecera {
+    .navbar-collapse { padding-top: .75rem; }
+    .nav-link { padding-left: 0 !important;
+      &::after { left: 0; right: auto; width: 1.75rem; }   // subrayado corto bajo el enlace activo
+    }
+  }
+}

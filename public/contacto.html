@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Contacto · Natyfarma</title>
+<meta name="description" content="Natyfarma, botica en Huancayo: medicamentos, cuidado personal, vitaminas y dermocosmética. Atención las 24 horas.">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/main.css" rel="stylesheet">
+</head>
+<body data-page="contacto">
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<div id="cabecera"></div>
+<main id="contenido">
+
+<section class="cabecera-pagina" aria-labelledby="t-con">
+  <div class="container">
+    <span class="etiqueta">Contacto</span>
+    <h1 id="t-con">Escríbenos</h1>
+    <p>Déjanos tu consulta y te responderemos a la brevedad, o visítanos en la botica.</p>
+  </div>
+</section>
+
+<section class="seccion" aria-label="Formulario y datos de contacto">
+  <div class="container contacto">
+    <div class="tarjeta-form">
+      <h2 class="h4 mb-4">Envíanos un mensaje</h2>
+      <form id="form-contacto">
+        <div class="mb-3"><label class="form-label" for="c-nombre">Nombre</label><input class="form-control" id="c-nombre" name="nombre" required maxlength="100" autocomplete="name"></div>
+        <div class="mb-3"><label class="form-label" for="c-correo">Correo</label><input class="form-control" id="c-correo" name="correo" type="email" required maxlength="120" autocomplete="email"></div>
+        <div class="mb-4"><label class="form-label" for="c-mensaje">Mensaje</label><textarea class="form-control" id="c-mensaje" name="mensaje" rows="5" required maxlength="2000"></textarea></div>
+        <button class="btn btn-natyfarma" type="submit">Enviar mensaje</button>
+      </form>
+    </div>
+    <div>
+      <h2 class="h4 mb-4">Visítanos</h2>
+      <ul class="datos" id="datos-contacto"></ul>
+      <iframe class="mapa" id="mapa" title="Mapa de ubicación de Natyfarma" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- Preguntas frecuentes: componente Accordion de Bootstrap 5, personalizado con Less (components/bootstrap.less) -->
+<section class="seccion suave" aria-labelledby="t-faq">
+  <div class="container contenedor-faq">
+    <div>
+      <span class="etiqueta">Ayuda</span>
+      <h2 id="t-faq">Preguntas frecuentes</h2>
+      <p class="text-secondary">Lo que más nos consultan nuestros clientes. Si tienes otra duda, escríbenos.</p>
+    </div>
+    <div class="accordion" id="faq">
+      <div class="accordion-item">
+        <h3 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">¿Puedo comprar desde la página web?</button></h3>
+        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faq"><div class="accordion-body">No. La web muestra nuestro catálogo y precios referenciales. La compra se realiza en la botica o puedes coordinarla con nosotros por WhatsApp.</div></div>
+      </div>
+      <div class="accordion-item">
+        <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">¿Qué gano si creo una cuenta?</button></h3>
+        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body">Al iniciar sesión verás en el catálogo las ofertas exclusivas para clientes registrados. Crear tu cuenta es gratis.</div></div>
+      </div>
+      <div class="accordion-item">
+        <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">¿En qué horario atienden?</button></h3>
+        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body">Atendemos las 24 horas, todos los días del año, en nuestro local.</div></div>
+      </div>
+      <div class="accordion-item">
+        <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">¿Los precios del catálogo son los finales?</button></h3>
+        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body">Son precios referenciales. Te recomendamos consultar la disponibilidad y el precio vigente con nuestro personal.</div></div>
+      </div>
+      <div class="accordion-item">
+        <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">¿Puedo devolver un producto?</button></h3>
+        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body">Acércate a la botica con tu boleta de venta. Nuestro personal revisará tu caso y, si corresponde, registrará la devolución.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<div id="pie"></div>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="js/core.js"></script><script src="js/layout.js"></script><script src="js/pages.js"></script>
+</body>
+</html>

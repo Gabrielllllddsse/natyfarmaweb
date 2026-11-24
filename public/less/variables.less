@@ -1,0 +1,40 @@
+// ===== Variables de diseño de Natyfarma =====
+// Paleta profesional en verde oscuro. El verde de marca (#2E7D32) queda como acento.
+@verde:           #1F4D36;              // color principal
+@verde-oscuro:    darken(@verde, 6%);   // hover de botones
+@verde-profundo:  #0F2A1D;              // pie de página, barra superior y panel
+@verde-acento:    #2E7D32;              // verde de marca del informe
+@verde-claro:     #9CC7AC;              // iconos sobre fondo oscuro
+@verde-suave:     #EAF2EC;              // fondos de iconos y avisos
+@blanco:          #FFFFFF;
+@fondo:           #F6F5F1;              // gris cálido para secciones alternas
+@texto:           #18221C;
+@texto-suave:     #5A665F;
+@borde:           #E2E6E1;
+@alerta:          #B3261E;
+@oferta:          #B4541A;
+
+// Tipografía: Outfit para títulos, Inter para el texto (lectura cómoda)
+@fuente:          'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+@fuente-titulos:  'Outfit', @fuente;
+@tamano-base:     1.0625rem;   // 17px
+
+// Forma y sombras (esquinas sobrias)
+@radio-sm: 6px;
+@radio:    10px;
+@radio-lg: 14px;
+@sombra:       0 14px 34px fade(@verde-profundo, 10%);
+@sombra-suave: 0 1px 2px fade(@verde-profundo, 6%), 0 2px 10px fade(@verde-profundo, 4%);
+
+// Movimiento
+@ease: cubic-bezier(.2, .7, .2, 1);
+@rapido: .2s;
+@medio:  .35s;
+
+// Puntos de quiebre (Bootstrap 5)
+@bp-sm: 576px;
+@bp-md: 768px;
+@bp-lg: 992px;
+@bp-xl: 1200px;
+
+@sidebar: 260px;

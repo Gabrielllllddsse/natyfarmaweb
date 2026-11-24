@@ -1,0 +1,97 @@
+// ===== Portada (Grid) =====
+.hero {
+  background: linear-gradient(180deg, @fondo 0%, @blanco 100%);
+  padding: 3.5rem 0 4.5rem;
+  .respond(@bp-lg; { padding: 5rem 0 6rem; });
+
+  .contenedor-hero {
+    display: grid; gap: 3rem; align-items: center;
+    .respond(@bp-lg; { grid-template-columns: 1.1fr .9fr; gap: 4rem; });
+  }
+
+  .hero-texto {
+    > * { margin-bottom: 1.5rem; }
+    h1 { max-width: 13ch; }
+    .lead { color: @texto-suave; font-size: 1.18rem; line-height: 1.6; max-width: 46ch; }
+    .acciones { .flex(row; flex-start; center; .8rem); flex-wrap: wrap; margin-bottom: 2rem; }
+  }
+
+  .abierto-ya {
+    .flex(row; flex-start; center; .65rem);
+    font-size: .95rem; font-weight: 500; color: @verde; margin: 0;
+    .punto { width: 8px; height: 8px; border-radius: 50%; background: @verde-acento; }
+  }
+
+  .hero-fotos {
+    position: relative;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 0;
+    figure { margin: 0; border-radius: @radio-lg; overflow: hidden; box-shadow: @sombra; background: @verde-suave; }
+    figure:nth-child(2) { margin-top: 3rem; }
+    img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; }
+  }
+
+  .hero-sello {
+    position: absolute; left: .75rem; bottom: .75rem;
+    .respond(@bp-lg; { left: -2rem; bottom: 2rem; });
+    .flex(row; flex-start; center; .85rem);
+    background: @blanco; border-radius: @radio; padding: .9rem 1.2rem .9rem .9rem; box-shadow: @sombra;
+    .icono { .caja-icono(2.6rem); }
+    strong { display: block; font-family: @fuente-titulos; font-weight: 600; font-size: 1rem; line-height: 1.2; }
+    span:not(.icono) { font-size: .85rem; color: @texto-suave; }
+  }
+}
+
+// Banda de beneficios
+.banda-beneficios {
+  background: @verde; color: @blanco; padding: 2.75rem 0;
+  .ventajas {
+    display: grid; gap: 2rem;
+    .respond(@bp-md; { grid-template-columns: repeat(3, 1fr); gap: 0; });
+  }
+  .ventaja {
+    .flex(row; flex-start; flex-start; 1rem);
+    .respond(@bp-md; {
+      padding: 0 2rem;
+      &:first-child { padding-left: 0; }
+      & + .ventaja { border-left: 1px solid fade(@blanco, 16%); }
+    });
+    .icono { .caja-icono(2.9rem; transparent; @verde-claro); border: 1px solid fade(@blanco, 22%); }
+    h3 { color: @blanco; font-size: 1.1rem; margin-bottom: .3rem; }
+    p { margin: 0; color: fade(@blanco, 75%); font-size: .95rem; }
+  }
+}
+
+// Bloque de dos columnas: foto y texto
+.bloque-dividido {
+  display: grid; gap: 2.5rem; align-items: center;
+  .respond(@bp-lg; { grid-template-columns: 1fr 1fr; gap: 4.5rem; });
+  > img { width: 100%; aspect-ratio: 5 / 4; object-fit: cover; border-radius: @radio-lg; box-shadow: @sombra; }
+  h2 { margin-bottom: 1rem; }
+  p { color: @texto-suave; }
+}
+
+.lista-check {
+  list-style: none; padding: 0; margin: 1.5rem 0 2rem;
+  li { .flex(row; flex-start; center; .75rem); margin-bottom: .75rem; font-weight: 500; }
+  [data-icono] { .caja-icono(1.7rem; @verde-suave; @verde-acento); border-radius: 50%; }
+}
+
+// Franja "Visítanos"
+.franja-info {
+  background: @verde; color: @blanco; padding: 4rem 0;
+  .respond(@bp-md; { padding: 5rem 0; });
+  .franja-grid {
+    display: grid; gap: 2.5rem; align-items: center;
+    .respond(@bp-lg; { grid-template-columns: 1fr 1.6fr; gap: 4rem; });
+  }
+  h2 { color: @blanco; margin-bottom: .9rem; }
+  p { color: fade(@blanco, 72%); margin-bottom: 1.75rem; }
+  .datos { display: grid; gap: 1rem; .respond(@bp-sm; { grid-template-columns: repeat(3, 1fr); }); }
+  .dato {
+    background: fade(@blanco, 5%); border: 1px solid fade(@blanco, 12%); border-radius: @radio; padding: 1.5rem;
+    [data-icono] { display: block; color: @verde-claro; margin-bottom: 1rem; .ico { width: 1.6rem; height: 1.6rem; } }
+    .rotulo { display: block; font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: fade(@blanco, 55%); margin-bottom: .35rem; }
+    span:not(.rotulo), a { display: block; color: @blanco; font-weight: 500; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  }
+}

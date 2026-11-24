@@ -1,0 +1,41 @@
+// ===== Unidad 4 · Personalización del framework Bootstrap 5 =====
+// Bootstrap se carga primero (/vendor/bootstrap) y estas reglas adaptan sus componentes
+// a la identidad visual de Natyfarma usando las variables y mixins de Less.
+
+// Valores calculados con Less antes de pasarlos a las variables CSS de Bootstrap
+@radio-interno: (@radio - 1px);
+@foco-acordeon: fade(@verde, 14%);
+
+// Variables CSS propias de los componentes de Bootstrap (se interpolan con @{...})
+.accordion {
+  --bs-accordion-border-color: ~"@{borde}";
+  --bs-accordion-border-radius: ~"@{radio}";
+  --bs-accordion-inner-border-radius: ~"@{radio-interno}";
+  --bs-accordion-active-bg: ~"@{verde-suave}";
+  --bs-accordion-active-color: ~"@{verde}";
+  --bs-accordion-btn-focus-box-shadow: ~"0 0 0 .22rem @{foco-acordeon}";
+  --bs-accordion-btn-padding-y: 1.1rem;
+  --bs-accordion-body-padding-y: 1.1rem;
+  box-shadow: @sombra-suave;
+  border-radius: @radio;
+
+  .accordion-button {
+    font-family: @fuente-titulos; font-weight: 600; font-size: 1.05rem; color: @texto;
+    .prefijo(transition; ~"background-color @{rapido}, color @{rapido}");
+    &:not(.collapsed) { box-shadow: inset 0 -1px 0 @borde; }
+  }
+  .accordion-body { color: @texto-suave; }
+}
+
+// Preguntas frecuentes: título a la izquierda, acordeón a la derecha (Grid)
+.contenedor-faq {
+  display: grid; gap: 2rem; align-items: start;
+  .respond(@bp-lg; { grid-template-columns: 1fr 1.6fr; gap: 4rem; });
+  h2 { margin-bottom: .8rem; }
+}
+
+// Botón de menú (navbar-toggler) y ventanas modales con los colores del sitio
+.navbar-toggler { border-color: @borde; &:focus { box-shadow: 0 0 0 .2rem fade(@verde, 18%); } }
+.modal-header { border-bottom-color: @borde; }
+.modal-footer { border-top-color: @borde; }
+.toast { border-radius: @radio-sm; box-shadow: @sombra; }

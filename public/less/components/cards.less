@@ -1,0 +1,87 @@
+// ===== Tarjetas: categorías, nosotros, catálogo =====
+.rejilla-categorias { .grid-auto(240px; 1.25rem); }
+
+.tarjeta-categoria {
+  .tarjeta(1.75rem); .elevar();
+  display: flex; flex-direction: column; gap: .55rem; text-decoration: none; color: @texto;
+  .icono { .caja-icono(3rem); margin-bottom: .6rem; transition: background @rapido, color @rapido; }
+  h3 { font-size: 1.2rem; margin: 0; }
+  p  { color: @texto-suave; font-size: .95rem; margin: 0; flex: 1; }
+  .ver { .flex(row; flex-start; center; .4rem); color: @verde; font-weight: 600; font-size: .95rem; margin-top: .9rem;
+    .ico { width: 1rem; height: 1rem; transition: transform @rapido @ease; } }
+  &:hover {
+    .icono { background: @verde; color: @blanco; }
+    .ver .ico { transform: translateX(4px); }
+  }
+}
+
+.misvis { display: grid; gap: 1.25rem; .respond(@bp-md; { grid-template-columns: 1fr 1fr; });
+  .tarjeta-texto { .tarjeta(2rem);
+    .icono { .caja-icono(3rem); margin-bottom: 1.25rem; }
+    p { margin: 0; color: @texto-suave; }
+  }
+}
+
+.fotos-local { display: grid; gap: 1.25rem; .respond(@bp-sm; { grid-template-columns: 1fr 1fr; });
+  img { width: 100%; height: 360px; object-fit: cover; border-radius: @radio-lg; box-shadow: @sombra; }
+}
+
+// Catálogo: filtros laterales (Flexbox) y productos (Grid)
+.catalogo {
+  display: grid; gap: 2rem; align-items: start;
+  .respond(@bp-lg; { grid-template-columns: 270px 1fr; gap: 2.5rem; });
+}
+
+.catalogo-filtros {
+  .tarjeta(1.4rem);
+  .respond(@bp-lg; { position: sticky; top: 6.5rem; });
+  h2 { font-family: @fuente; font-size: .74rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: @texto-suave; margin: 1.6rem 0 .75rem; }
+}
+
+.buscador { position: relative;
+  [data-icono] { position: absolute; left: .9rem; top: 50%; transform: translateY(-50%); color: @texto-suave; display: flex; }
+  .form-control { padding-left: 2.7rem; }
+}
+
+.filtros { .flex(row; flex-start; center; .5rem); flex-wrap: wrap;
+  .respond(@bp-lg; { flex-direction: column; align-items: stretch; gap: .2rem; });
+  button {
+    border: 1px solid @borde; background: @blanco; color: @texto; border-radius: @radio-sm;
+    padding: .5rem 1rem; font-weight: 500; font-size: .95rem; text-align: left; transition: background @rapido, color @rapido, border-color @rapido;
+    .respond(@bp-lg; { border-color: transparent; background: transparent; });
+    &:hover { background: @verde-suave; color: @verde; }
+    &.activo { background: @verde; border-color: @verde; color: @blanco; font-weight: 600; }
+  }
+}
+
+.rejilla-productos { .grid-auto(220px; 1.25rem); }
+
+.tarjeta-producto {
+  .tarjeta(0); .elevar(); overflow: hidden; cursor: pointer; text-align: left; width: 100%; padding: 0;
+  display: flex; flex-direction: column;
+  .media { height: 160px; background: @verde-suave; color: @verde; .flex(row; center; center); position: relative;
+    > .ico { width: 2.6rem; height: 2.6rem; opacity: .75; transition: transform @medio @ease; }
+    img { width: 100%; height: 100%; object-fit: cover; }
+  }
+  &:hover .media > .ico { transform: scale(1.12); }
+  .cuerpo { padding: 1.1rem 1.2rem 1.25rem; display: flex; flex-direction: column; gap: .3rem; flex: 1; }
+  .cat { order: -1; font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: @texto-suave; }
+  h3 { font-family: @fuente; font-size: 1rem; font-weight: 600; letter-spacing: 0; line-height: 1.35; margin: 0; }
+  .precio { font-size: 1.25rem; margin-top: auto; padding-top: .6rem; }
+  .agotado { color: @alerta; font-size: .82rem; font-weight: 600; }
+  .insignia-oferta { position: absolute; top: .75rem; left: .75rem; background: @oferta; color: @blanco; font-size: .8rem; font-weight: 700; padding: .2rem .6rem; border-radius: @radio-sm; }
+}
+
+.aviso-ofertas {
+  .flex(row; flex-start; center; .9rem);
+  background: @verde-suave; border-left: 3px solid @verde; border-radius: @radio-sm; padding: 1rem 1.25rem; margin-bottom: 1.5rem; font-size: .97rem;
+  > .ico { color: @verde; width: 1.5rem; height: 1.5rem; }
+  a { font-weight: 600; }
+}
+.vacio { text-align: center; color: @texto-suave; padding: 3rem 1rem; grid-column: 1 / -1; }
+
+.modal-producto .media-grande {
+  background: @verde-suave; color: @verde; border-radius: @radio; height: 220px; .flex(row; center; center); overflow: hidden;
+  > .ico { width: 4rem; height: 4rem; opacity: .75; }
+  img { width: 100%; height: 100%; object-fit: cover; }
+}

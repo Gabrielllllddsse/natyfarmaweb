@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Iniciar sesión · Natyfarma</title>
+<meta name="description" content="Natyfarma, botica en Huancayo: medicamentos, cuidado personal, vitaminas y dermocosmética. Atención las 24 horas.">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/main.css" rel="stylesheet">
+</head>
+<body data-page="login">
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<div id="cabecera"></div>
+<main id="contenido">
+
+<section class="seccion suave seccion-login" aria-labelledby="t-login">
+  <div class="container">
+    <div class="caja-login">
+      <div class="text-center mb-4">
+        <span class="etiqueta">Mi cuenta</span>
+        <h1 id="t-login" class="h3 mb-1">Bienvenido a Natyfarma</h1>
+        <p class="text-secondary mx-auto mb-0">Ingresa o crea tu cuenta para ver ofertas exclusivas.</p>
+      </div>
+      <ul class="nav nav-pills nav-fill mb-4" role="tablist">
+        <li class="nav-item" role="presentation"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-ingresar" type="button" role="tab">Ingresar</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-registro" type="button" role="tab">Crear cuenta</button></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="tab-ingresar" role="tabpanel">
+          <form id="form-login">
+            <div class="mb-3"><label class="form-label" for="l-usuario">Usuario o correo</label><input class="form-control" id="l-usuario" required autocomplete="username"></div>
+            <div class="mb-4"><label class="form-label" for="l-clave">Contraseña</label><input class="form-control" id="l-clave" type="password" required autocomplete="current-password"></div>
+            <button class="btn btn-natyfarma w-100" type="submit">Ingresar</button>
+            <p class="text-secondary small mt-3 mb-0">Personal de la botica: usa tu usuario. Clientes: usa tu correo.</p>
+          </form>
+        </div>
+        <div class="tab-pane fade" id="tab-registro" role="tabpanel">
+          <form id="form-registro">
+            <div class="mb-3"><label class="form-label" for="r-nombres">Nombre completo</label><input class="form-control" id="r-nombres" required maxlength="100" autocomplete="name"></div>
+            <div class="mb-3"><label class="form-label" for="r-correo">Correo</label><input class="form-control" id="r-correo" type="email" required autocomplete="email"></div>
+            <div class="mb-3"><label class="form-label" for="r-tel">Teléfono (opcional)</label><input class="form-control" id="r-tel" type="tel" maxlength="20" autocomplete="tel"></div>
+            <div class="mb-4"><label class="form-label" for="r-clave">Contraseña (mínimo 6 caracteres)</label><input class="form-control" id="r-clave" type="password" minlength="6" required autocomplete="new-password"></div>
+            <button class="btn btn-natyfarma w-100" type="submit">Crear mi cuenta</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<div id="pie"></div>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="js/core.js"></script><script src="js/layout.js"></script><script src="js/pages.js"></script>
+</body>
+</html>

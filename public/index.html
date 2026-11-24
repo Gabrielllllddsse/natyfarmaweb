@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Natyfarma · Botica en Huancayo</title>
+<meta name="description" content="Natyfarma, botica en Huancayo: medicamentos, cuidado personal, vitaminas y dermocosmética. Atención las 24 horas.">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/main.css" rel="stylesheet">
+</head>
+<body data-page="inicio">
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<div id="cabecera"></div>
+<main id="contenido">
+
+<section class="hero" aria-labelledby="t-hero">
+  <div class="container contenedor-hero">
+    <div class="hero-texto">
+      <span class="etiqueta">Botica en Huancayo</span>
+      <h1 id="t-hero">Cuidamos de ti y de los tuyos</h1>
+      <p class="lead">Medicamentos, cuidado personal, vitaminas y dermocosmética con la orientación de un equipo que conoce a su comunidad.</p>
+      <div class="acciones">
+        <a class="btn btn-natyfarma" href="productos.html">Ver productos <span data-icono="flecha"></span></a>
+        <a class="btn btn-natyfarma-borde" data-mapa target="_blank" rel="noopener">Cómo llegar</a>
+      </div>
+      <p class="abierto-ya"><span class="punto" aria-hidden="true"></span> Abierto las 24 horas, todos los días</p>
+    </div>
+    <div class="hero-fotos">
+      <figure><img src="img/fachada.png" alt="Fachada de la botica Natyfarma en Huancayo"></figure>
+      <figure><img src="img/interior.png" alt="Interior de la botica con estantes ordenados"></figure>
+      <div class="hero-sello">
+        <span class="icono" data-icono="reloj"></span>
+        <div><strong>Atención 24 horas</strong><span>Los 365 días del año</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="banda-beneficios" aria-labelledby="t-ventajas">
+  <div class="container">
+    <h2 id="t-ventajas" class="visually-hidden">Por qué elegirnos</h2>
+    <div class="ventajas">
+      <article class="ventaja"><span class="icono" data-icono="reloj"></span><div><h3>Abierto las 24 horas</h3><p>Todos los días del año, cuando más nos necesites.</p></div></article>
+      <article class="ventaja"><span class="icono" data-icono="asesoria"></span><div><h3>Asesoría profesional</h3><p>Te orientamos con atención personalizada y paciencia.</p></div></article>
+      <article class="ventaja"><span class="icono" data-icono="familia"></span><div><h3>Trato familiar</h3><p>Un negocio familiar que conoce a su comunidad.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="seccion" aria-labelledby="t-cat">
+  <div class="container">
+    <div class="encabezado-seccion">
+      <div>
+        <span class="etiqueta">Catálogo</span>
+        <h2 id="t-cat">Encuentra lo que necesitas</h2>
+        <p>Elige una categoría para ver los productos disponibles en tienda.</p>
+      </div>
+      <a class="enlace-flecha" href="productos.html">Ver todos los productos <span data-icono="flecha"></span></a>
+    </div>
+    <div class="rejilla-categorias" id="rejilla-categorias" aria-busy="true">
+      <!-- Tarjetas de espera con animación (Sesión 9); se reemplazan al cargar las categorías -->
+      <div class="tarjeta-categoria esqueleto" aria-hidden="true"></div><div class="tarjeta-categoria esqueleto" aria-hidden="true"></div>
+      <div class="tarjeta-categoria esqueleto" aria-hidden="true"></div><div class="tarjeta-categoria esqueleto" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<section class="seccion suave" aria-labelledby="t-nos">
+  <div class="container bloque-dividido">
+    <img src="img/interior.png" alt="Estantes de productos dentro de Natyfarma" loading="lazy">
+    <div>
+      <span class="etiqueta">Quiénes somos</span>
+      <h2 id="t-nos">Un negocio familiar, cerca de ti</h2>
+      <p>Natyfarma es una botica peruana dedicada a la venta de medicamentos, productos farmacéuticos, cuidado personal y suplementos naturales.</p>
+      <ul class="lista-check">
+        <li><span data-icono="check"></span>Productos farmacéuticos y de bienestar de calidad</li>
+        <li><span data-icono="check"></span>Atención cercana, rápida y confiable</li>
+        <li><span data-icono="check"></span>Asesoría profesional en cada compra</li>
+      </ul>
+      <a class="btn btn-natyfarma-borde" href="nosotros.html">Conoce más</a>
+    </div>
+  </div>
+</section>
+
+<section class="franja-info" aria-labelledby="t-visita">
+  <div class="container franja-grid">
+    <div>
+      <span class="etiqueta claro">Visítanos</span>
+      <h2 id="t-visita">Te esperamos en la botica</h2>
+      <p>Pasa por nuestro local o escríbenos para consultar la disponibilidad de un producto.</p>
+      <a class="btn btn-claro" href="contacto.html">Escríbenos</a>
+    </div>
+    <div class="datos">
+      <div class="dato"><span data-icono="ubicacion"></span><span class="rotulo">Dirección</span><span data-cfg="direccion"></span></div>
+      <div class="dato"><span data-icono="reloj"></span><span class="rotulo">Horario</span><span data-cfg="horario"></span></div>
+      <div class="dato"><span data-icono="flecha"></span><span class="rotulo">Ubicación</span><a data-mapa target="_blank" rel="noopener">Ver en el mapa</a></div>
+    </div>
+  </div>
+</section>
+</main>
+<div id="pie"></div>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="js/core.js"></script><script src="js/layout.js"></script><script src="js/pages.js"></script>
+</body>
+</html>

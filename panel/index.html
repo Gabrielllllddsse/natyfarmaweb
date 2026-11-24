@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<meta name="robots" content="noindex">
+<title>Panel · Natyfarma</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/main.css" rel="stylesheet">
+</head>
+<body class="panel">
+<div class="panel-layout">
+  <aside class="barra-lateral">
+    <div class="logo" id="logo"></div>
+    <div class="quien" id="quien"></div>
+    <nav id="menu" aria-label="Secciones del panel"></nav>
+    <div class="mt-3 d-flex flex-wrap gap-2">
+      <a class="btn btn-sm btn-natyfarma-borde" href="/index.html">Ver sitio</a>
+      <button class="btn btn-sm btn-natyfarma-borde" id="salir" type="button">Salir</button>
+    </div>
+  </aside>
+  <main class="contenido" id="contenido" tabindex="-1"></main>
+</div>
+
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="m-titulo" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
+    <div class="modal-header"><h2 class="modal-title h4" id="m-titulo"></h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button></div>
+    <div class="modal-body" id="m-cuerpo"></div>
+    <div class="modal-footer"><button type="button" class="btn btn-natyfarma-borde" data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-natyfarma" id="m-guardar">Guardar</button></div>
+  </div></div>
+</div>
+
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/js/core.js"></script>
+<script src="/panel/panel.js"></script>
+</body>
+</html>

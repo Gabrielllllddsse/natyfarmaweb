@@ -1,0 +1,75 @@
+// ===== Base: ajustes sobre Bootstrap 5 =====
+:root {
+  --bs-primary: @verde;
+  --bs-primary-rgb: 31, 77, 54;
+  --bs-link-color: @verde;
+  --bs-link-color-rgb: 31, 77, 54;
+  --bs-link-hover-color: @verde-oscuro;
+  --bs-body-font-family: @fuente;
+  --bs-body-color: @texto;
+  --bs-secondary-color: @texto-suave;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: @fuente;
+  font-size: @tamano-base;
+  line-height: 1.65;
+  color: @texto;
+  background: @blanco;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+
+  > main { flex: 1; }
+}
+
+h1, h2, h3, h4, .h3, .h4 { font-family: @fuente-titulos; font-weight: 600; line-height: 1.15; letter-spacing: -.02em; color: @texto; }
+h1 { font-size: clamp(2.2rem, 4.6vw, 3.5rem); }
+h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); }
+p  { max-width: 68ch; }
+a  { color: @verde; }
+.text-secondary { color: @texto-suave !important; }
+
+:focus-visible { outline: 2px solid @verde-acento; outline-offset: 3px; border-radius: 4px; }
+
+// Iconos de línea (SVG)
+.ico { width: 1.25em; height: 1.25em; flex: none; display: inline-block; vertical-align: -.2em; }
+
+// Botones
+.btn-natyfarma        { .boton(@verde); }
+.btn-natyfarma-borde  { .boton-borde(@verde); }
+.btn-claro            { .boton(@blanco; @verde); }
+.btn-sm.btn-natyfarma, .btn-sm.btn-natyfarma-borde { padding: .45rem 1rem; font-size: .88rem; }
+
+// Secciones
+.seccion { padding: 3.5rem 0; .respond(@bp-md; { padding: 5rem 0; }); &.suave { background: @fondo; } }
+.etiqueta { .sobretitulo(); margin-bottom: .9rem; &.claro { color: @verde-claro; } }
+
+.encabezado-seccion {
+  .flex(row; space-between; flex-end; 1.5rem); flex-wrap: wrap; margin-bottom: 2.5rem;
+  h2 { margin-bottom: .6rem; }
+  p { color: @texto-suave; margin: 0; }
+}
+
+.enlace-flecha {
+  .flex(row; flex-start; center; .45rem); display: inline-flex;
+  font-weight: 600; color: @verde; text-decoration: none;
+  .ico { transition: transform @rapido @ease; }
+  &:hover { color: @verde-oscuro; .ico { transform: translateX(4px); } }
+}
+
+// Encabezado de las páginas interiores
+.cabecera-pagina {
+  background: @fondo; border-bottom: 1px solid @borde; padding: 3rem 0 2.75rem;
+  .respond(@bp-md; { padding: 4.5rem 0 4rem; });
+  h1 { margin: 0 0 .8rem; }
+  p { color: @texto-suave; font-size: 1.1rem; margin: 0; }
+}
+
+.precio { color: @verde; font-weight: 600; font-family: @fuente-titulos; }
+.precio-antes { color: @texto-suave; text-decoration: line-through; font-weight: 400; font-size: .85em; margin-right: .4rem; }
+.skip-link { position: absolute; left: -999px; &:focus { left: 1rem; top: 1rem; z-index: 2000; background: @blanco; padding: .5rem 1rem; } }
+.modal-content { border-radius: @radio-lg; border: 0; box-shadow: @sombra; }
