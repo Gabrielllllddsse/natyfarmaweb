@@ -3,6 +3,7 @@
 -- Puedes abrir este archivo en MySQL Workbench y ejecutarlo completo,
 -- o usar "npm run setup" para crear y llenar todo automáticamente.
 -- =====================================================================
+-- Los comentarios /*T! ... */ solo los lee TiDB (despliegue en la nube): numeración correlativa de IDs. MySQL los ignora.
 CREATE DATABASE IF NOT EXISTS natyfarma CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE natyfarma;
 
@@ -13,7 +14,7 @@ CREATE TABLE IF NOT EXISTS roles (
   nombre VARCHAR(30) NOT NULL UNIQUE,
   permisos VARCHAR(255) NOT NULL DEFAULT '',
   base TINYINT(1) NOT NULL DEFAULT 0
-);
+) /*T![auto_id_cache] AUTO_ID_CACHE=1 */;
 
 CREATE TABLE IF NOT EXISTS usuarios (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -24,7 +25,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
   activo TINYINT(1) NOT NULL DEFAULT 1,
   creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (rol_id) REFERENCES roles(id)
-);
+) /*T![auto_id_cache] AUTO_ID_CACHE=1 */;
 
 CREATE TABLE IF NOT EXISTS clientes (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -33,14 +34,14 @@ CREATE TABLE IF NOT EXISTS clientes (
   password_hash VARCHAR(100) NOT NULL,
   telefono VARCHAR(20),
   creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+) /*T![auto_id_cache] AUTO_ID_CACHE=1 */;
 
 CREATE TABLE IF NOT EXISTS categorias (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(60) NOT NULL UNIQUE,
   descripcion VARCHAR(160),
   icono VARCHAR(20) DEFAULT ''   -- nombre del icono SVG (pastilla, frasco, hoja, gota); vacío = según el nombre
-);
+) /*T![auto_id_cache] AUTO_ID_CACHE=1 */;
 
 CREATE TABLE IF NOT EXISTS productos (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -54,7 +55,7 @@ CREATE TABLE IF NOT EXISTS productos (
   activo TINYINT(1) NOT NULL DEFAULT 1,
   creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (categoria_id) REFERENCES categorias(id)
-);
+) /*T![auto_id_cache] AUTO_ID_CACHE=1 */;
 
 CREATE TABLE IF NOT EXISTS ventas (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -66,7 +67,7 @@ CREATE TABLE IF NOT EXISTS ventas (
   total_devuelto DECIMAL(10,2) NOT NULL DEFAULT 0,   -- suma de las devoluciones de esta venta
   fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
-);
+) /*T![auto_id_cache] AUTO_ID_CACHE=1 */;
 
 CREATE TABLE IF NOT EXISTS detalle_venta (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -79,7 +80,7 @@ CREATE TABLE IF NOT EXISTS detalle_venta (
   devuelto INT NOT NULL DEFAULT 0,                   -- unidades ya devueltas de este producto
   FOREIGN KEY (venta_id) REFERENCES ventas(id) ON DELETE CASCADE,
   FOREIGN KEY (producto_id) REFERENCES productos(id)
-);
+) /*T![auto_id_cache] AUTO_ID_CACHE=1 */;
 
 -- Devoluciones: cada devolución pertenece a una venta y puede ser total o parcial
 CREATE TABLE IF NOT EXISTS devoluciones (
@@ -91,7 +92,7 @@ CREATE TABLE IF NOT EXISTS devoluciones (
   fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (venta_id) REFERENCES ventas(id),
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
-);
+) /*T![auto_id_cache] AUTO_ID_CACHE=1 */;
 
 CREATE TABLE IF NOT EXISTS detalle_devolucion (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -103,7 +104,7 @@ CREATE TABLE IF NOT EXISTS detalle_devolucion (
   subtotal DECIMAL(10,2) NOT NULL,
   FOREIGN KEY (devolucion_id) REFERENCES devoluciones(id) ON DELETE CASCADE,
   FOREIGN KEY (producto_id) REFERENCES productos(id)
-);
+) /*T![auto_id_cache] AUTO_ID_CACHE=1 */;
 
 CREATE TABLE IF NOT EXISTS movimientos_stock (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -115,7 +116,7 @@ CREATE TABLE IF NOT EXISTS movimientos_stock (
   fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (producto_id) REFERENCES productos(id),
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
-);
+) /*T![auto_id_cache] AUTO_ID_CACHE=1 */;
 
 CREATE TABLE IF NOT EXISTS ofertas (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -126,7 +127,7 @@ CREATE TABLE IF NOT EXISTS ofertas (
   fecha_fin DATE NOT NULL,
   activa TINYINT(1) NOT NULL DEFAULT 1,
   FOREIGN KEY (producto_id) REFERENCES productos(id) ON DELETE CASCADE
-);
+) /*T![auto_id_cache] AUTO_ID_CACHE=1 */;
 
 CREATE TABLE IF NOT EXISTS mensajes (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -135,7 +136,7 @@ CREATE TABLE IF NOT EXISTS mensajes (
   mensaje TEXT NOT NULL,
   leido TINYINT(1) NOT NULL DEFAULT 0,
   fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+) /*T![auto_id_cache] AUTO_ID_CACHE=1 */;
 
 CREATE TABLE IF NOT EXISTS configuracion (
   clave VARCHAR(40) PRIMARY KEY,

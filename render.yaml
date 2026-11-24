@@ -1,5 +1,5 @@
 # Despliegue en Render (plan gratuito). Render lee este archivo al crear un "Blueprint".
-# La base de datos MySQL va aparte (Aiven, plan Free): sus datos se escriben en el panel de Render.
+# La base de datos va aparte en TiDB Cloud Starter (gratuito, compatible con MySQL).
 services:
   - type: web
     name: natyfarmaweb
@@ -28,5 +28,3 @@ services:
         sync: false
       - key: DB_NAME
         value: natyfarma
-      - key: DB_CA
-        sync: false                        # certificado CA de Aiven (texto completo)

@@ -56,25 +56,21 @@ public/     páginas HTML, css/ (compilado), less/ (fuente), js/, img/, uploads/
 panel/      panel interno (index.html + panel.js)
 ```
 
-## 8. Despliegue gratuito en internet (Render + Aiven)
+## 8. Despliegue gratuito en internet (Render + TiDB Cloud)
 
-El sistema queda en línea las 24 horas con dos servicios gratuitos: **Aiven** (base de datos MySQL 8) y **Render** (servidor Node.js). No hace falta modificar el código; todo se configura con variables de entorno.
+El sistema queda en línea las 24 horas con dos servicios gratuitos: **TiDB Cloud Starter** (base de datos compatible con MySQL, 5 GB sin vencimiento) y **Render** (servidor Node.js). Todo se configura con variables de entorno.
 
-**Paso 1. Base de datos en Aiven**
-1. Crear una cuenta en https://aiven.io y un servicio **MySQL** con el plan **Free**.
-2. En la pestaña *Overview* del servicio copiar: *Host*, *Port*, *User* (avnadmin) y *Password*.
-3. Descargar el **CA certificate** (archivo `ca.pem`) y abrirlo con el Bloc de notas para copiar su contenido.
+**Paso 1. Base de datos en TiDB Cloud**
+1. Crear una cuenta en https://tidbcloud.com y un clúster **Starter** (gratuito).
+2. Pulsar **Connect**, elegir *Connect With: General* y **Generate Password**.
+3. Copiar *HOST*, *PORT* (4000), *USERNAME* (tiene la forma `xxxx.root`) y la contraseña.
 
-**Paso 2. Código en GitHub**
-1. Crear un repositorio (puede ser privado) y subir esta carpeta. El `.gitignore` ya excluye `node_modules` y `.env`.
-
-**Paso 3. Servidor en Render**
-1. Crear una cuenta en https://render.com con GitHub y elegir **New > Blueprint**; seleccionar el repositorio. Render lee `render.yaml`.
-2. Completar las variables que pide: `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD` (de Aiven) y `DB_CA` (pegar el contenido completo de `ca.pem`).
-3. Pulsar **Apply**. Al iniciar, `npm run start:nube` crea las tablas y los usuarios en Aiven y arranca el sitio.
-4. La dirección queda como `https://natyfarmaweb.onrender.com` (o similar).
+**Paso 2. Servidor en Render**
+1. Abrir https://render.com/deploy?repo=https://github.com/Gabrielllllddsse/natyfarmaweb e iniciar sesión con GitHub.
+2. Completar `DB_HOST`, `DB_PORT`, `DB_USER` y `DB_PASSWORD` con los datos de TiDB.
+3. Pulsar **Apply**. Al iniciar, `npm run start:nube` crea las tablas y los usuarios y arranca el sitio.
 
 **A tener en cuenta (plan gratuito)**
-- Tras unos 15 minutos sin visitas el servidor se suspende; la siguiente visita tarda cerca de un minuto en cargar y luego funciona normal.
-- El disco de Render se reinicia en cada despliegue: las **fotos subidas desde el panel** se pierden (las imágenes propias del sitio no). Los datos de la base (ventas, productos, usuarios) sí se conservan en Aiven.
-- Por seguridad, cambiar las contraseñas iniciales de `admin` y `cajero` desde **Usuarios** después del primer ingreso.
+- Tras unos 15 minutos sin visitas el servidor se suspende; la siguiente visita tarda cerca de un minuto y luego funciona normal.
+- El disco de Render se reinicia en cada despliegue: las **fotos subidas desde el panel** se pierden (las imágenes propias del sitio no). Los datos de la base se conservan.
+- Para otro proveedor MySQL que exija certificado propio, se puede agregar la variable `DB_CA` con su contenido.
