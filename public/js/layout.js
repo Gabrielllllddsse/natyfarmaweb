@@ -76,6 +76,7 @@
         <div class="legal">
           <span>© ${new Date().getFullYear()} Natyfarma. Todos los derechos reservados.</span>
           <span>Precios referenciales. Venta en tienda.</span>
+          <span>Hecho por Gabriel Garcia Campos</span>
         </div>
       </div>
     </footer>`;
