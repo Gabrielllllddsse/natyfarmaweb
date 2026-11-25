@@ -232,7 +232,8 @@ router.get('/devoluciones', devoluciones, wrap(async (req, res) => {
     `SELECT dv.id, dv.venta_id, dv.fecha, dv.motivo, dv.total, u.nombres AS usuario,
             GROUP_CONCAT(CONCAT(dd.cantidad, ' x ', dd.nombre_producto) SEPARATOR ', ') AS productos
      FROM devoluciones dv JOIN usuarios u ON u.id = dv.usuario_id JOIN detalle_devolucion dd ON dd.devolucion_id = dv.id
-     GROUP BY dv.id ORDER BY dv.id DESC LIMIT 100`);
+     GROUP BY dv.id, dv.venta_id, dv.fecha, dv.motivo, dv.total, u.nombres   -- todas las columnas (exigido por TiDB)
+     ORDER BY dv.id DESC LIMIT 100`);
   res.json(rows);
 }));
 
@@ -309,7 +310,7 @@ router.put('/mensajes/:id/leido', mensajes, wrap(async (req, res) => {
 router.get('/roles', requiere('roles', 'usuarios'), wrap(async (req, res) => {
   const [rows] = await db.query(
     `SELECT r.id, r.nombre, r.permisos, r.base, COUNT(u.id) AS usuarios
-     FROM roles r LEFT JOIN usuarios u ON u.rol_id = r.id GROUP BY r.id ORDER BY r.base DESC, r.id`);
+     FROM roles r LEFT JOIN usuarios u ON u.rol_id = r.id GROUP BY r.id, r.nombre, r.permisos, r.base ORDER BY r.base DESC, r.id`);
   res.json({ modulos: MODULOS, roles: rows.map((r) => ({ ...r, permisos: leerPermisos(r.permisos) })) });
 }));
 
@@ -343,7 +344,7 @@ router.put('/roles/:id', roles, wrap(async (req, res) => {
 }));
 
 router.delete('/roles/:id', roles, wrap(async (req, res) => {
-  const [[r]] = await db.query('SELECT r.base, COUNT(u.id) n FROM roles r LEFT JOIN usuarios u ON u.rol_id = r.id WHERE r.id = ? GROUP BY r.id', [req.params.id]);
+  const [[r]] = await db.query('SELECT r.base, COUNT(u.id) n FROM roles r LEFT JOIN usuarios u ON u.rol_id = r.id WHERE r.id = ? GROUP BY r.id, r.base', [req.params.id]);
   if (!r) return res.status(404).json({ error: 'Rol no encontrado.' });
   if (r.base) return res.status(400).json({ error: 'Los roles Administrador y Cajero no se pueden eliminar.' });
   if (r.n) return res.status(409).json({ error: `Este rol tiene ${r.n} usuario(s). Cámbiales el rol antes de eliminarlo.` });
